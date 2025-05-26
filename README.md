@@ -42,39 +42,31 @@ In timing diagram Q0 is changing as soon as the negative edge of clock pulse is 
 **PROGRAM**
 
 ```
+module bit(
 
- Developed by:PRIYADHARSHINI J
+input wire clk, // Clock input
 
- RegisterNumber:24901116
+output reg [3:0] count // 4-bit counter output
+
+);
+
+// Counter logic
+
+always @(posedge clk) begin
+
+if (count == 4'b1111) // Reset when count reaches 15
+
+count <= 4'b0000;
+
+else
+
+end
+
+count <= count + 1; // Increment count
+
+endmodule
 
 ```
- Program for 4 Bit Ripple Counter and verify its truth table in quartus using Verilog
- programming.
-
- 
- module bit(
- 
- input wire clk, // Clock input
- 
- output reg [3:0] count // 4-bit counter output
- 
- );
- 
- // Counter logic
- 
- always @(posedge clk) begin
- 
- if (count == 4'b1111) // Reset when count reaches 15
- 
- count <= 4'b0000;
- 
- else
- 
- end
- 
- count <= count + 1; // Increment count
- 
- endmodule
  
 **RTL LOGIC FOR 4 Bit Ripple Counter**
 ![Screenshot 2024-12-20 090136](https://github.com/user-attachments/assets/3e814719-bf2f-4c3f-8292-4aefea58d1d5)
