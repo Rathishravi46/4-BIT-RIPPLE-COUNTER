@@ -1,5 +1,12 @@
 # 4-BIT-RIPPLE-COUNTER
 
+ Name: Rathish R
+ 
+ Reg no : 24901297
+ 
+ Date : 16.05.25
+ 
+
 **AIM:**
 
 To implement  4 Bit Ripple Counter using verilog and validating their functionality using their functional tables
