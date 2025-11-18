@@ -1,12 +1,5 @@
-# 4-BIT-RIPPLE-COUNTER
-
- Name: Rathish R
- 
- Reg no : 24901297
- 
- Date : 16.05.25
- 
-
+## EX-12 4-BIT-RIPPLE-COUNTER
+## DATE: 18-11-2025
 **AIM:**
 
 To implement  4 Bit Ripple Counter using verilog and validating their functionality using their functional tables
@@ -31,60 +24,86 @@ In timing diagram Q0 is changing as soon as the negative edge of clock pulse is 
 
 **Procedure**
 
-```
+  1. Type the program in Quartus software.
+  
+  2. Compile and run the program.
+  
+  3. Generate the RTL schematic and save the logic diagram.
+  
+  4. Create nodes for inputs and outputs to generate the timing diagram.
+  
+  5. For different input combinations generate the timing diagram.
 
- 1. Type the program in Quartus software.
-
- 2. Compile and run the program.
-
- 3. Generate the RTL schematic and save the logic diagram.
-
- 4. Create nodes for inputs and outputs to generate the timing diagram.
-
- 5. For different input combinations generate the timing diagram.
-
-
-```
 
 **PROGRAM**
-
 ```
-module bit(
+module BRC (
 
-input wire clk, // Clock input
+input clk, // Clock input
 
-output reg [3:0] count // 4-bit counter output
+input reset, // Reset input (active high)
+
+output [3:0] q // 4-bit output
 
 );
 
-// Counter logic
+// Internal signals for flip-flops
 
-always @(posedge clk) begin
+reg [3:0] q_int;
 
-if (count == 4'b1111) // Reset when count reaches 15
+// Assign internal register to output
 
-count <= 4'b0000;
+assign q = q_int;
+
+always @(posedge clk or posedge reset) begin
+
+if (reset)
+
+q_int[0] <= 1'b0; // Reset the first bit to 0
 
 else
 
+q_int[0] <= ~q_int[0]; // Toggle the first bit on clock edge
+
 end
 
-count <= count + 1; // Increment count
+// Generate the other flip-flops based on the output of the previous one
+
+genvar i;
+
+generate
+
+for (i = 1; i < 4; i = i + 1) begin : ripple
+
+always @(posedge q_int[i-1] or posedge reset) begin
+
+if (reset)
+
+q_int[i] <= 1'b0; // Reset the bit to 0
+
+else
+
+q_int[i] <= ~q_int[i]; // Toggle the bit on clock edge of previous stage
+
+end
+
+end
+
+endgenerate
 
 endmodule
-
 ```
- 
-**RTL LOGIC FOR 4 Bit Ripple Counter**
-![Screenshot 2024-12-20 090136](https://github.com/user-attachments/assets/3e814719-bf2f-4c3f-8292-4aefea58d1d5)
+/* Program for 4 Bit Ripple Counter and verify its truth table in quartus using Verilog programming.
 
+## Developed by:RATHISH.R
+## RegisterNumber:212224240132
+*/
+
+**RTL LOGIC FOR 4 Bit Ripple Counter**
+![image](https://github.com/user-attachments/assets/09030229-b105-4791-8348-9c946cc48bc6)
 
 **TIMING DIGRAMS FOR 4 Bit Ripple Counter**
-![Screenshot 2024-12-20 090303](https://github.com/user-attachments/assets/4c432b81-c811-4b89-839b-acea331c0529)
-
+![image](https://github.com/user-attachments/assets/c2452fd0-0feb-427f-8396-6bfde6afe4c8)
 
 **RESULTS**
-```
- Thus the 4 Bit Ripple Counter using verilog is implemented and their functionality
- using their functional tables is validated
-```
+The given Program for 4 Bit Ripple Counter and verify its truth table in quartus using Verilog programming.
